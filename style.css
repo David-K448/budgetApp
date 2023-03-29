@@ -94,7 +94,14 @@ body {
     text-align: center;
     font-weight: 400;
     color: #e5e5e5;
+    position: relative;
 }
+
+.output-container span:before{
+    content: "$";
+    position: relative;
+    left: -.05em;
+  }
 
 .submit {
     font-size: 1em;
