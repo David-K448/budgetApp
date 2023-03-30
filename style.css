@@ -76,9 +76,9 @@ body {
 }
 .output-container {
     width: 60%;
-    background-color: #587ef4;
+    background-color: #89C8AD;
     color: #fff;
-    border-radius: 0.3em;
+    border-radius: 0.5em;
     box-shadow: 0 0.6em 1.2em rgba(28, 0, 80, 0.06);
     margin: 2em 0;
     padding: 1.2em;
@@ -93,7 +93,7 @@ body {
     display: block;
     text-align: center;
     font-weight: 400;
-    color: #e5e5e5;
+    color: #fff;
     position: relative;
 }
 
@@ -106,7 +106,7 @@ body {
 .submit {
     font-size: 1em;
     margin-top: 0.8em;
-    background-color: #587ef4;
+    background-color: #89C8AD;
     border: none;
     outline: none;
     color: #fff;
@@ -124,7 +124,7 @@ body {
 
 .sublist-content {
     width: 100%;
-    border-left: 0.3em solid #587ef4;
+    border-left: 0.4em solid ;
     margin-bottom: 0.6em;
     padding: 0.5em 1em;
     display: grid;
@@ -163,12 +163,27 @@ body {
     margin-left: auto;
 }
 
-.edit, .delete{
+.edit {
     background: transparent;
     cursor: pointer;
     margin-right: 1.5em;
     border: none;
-    color: #587ef4;
+    color: #89C8AD;
+}
+
+.delete {
+    background: transparent;
+    cursor: pointer;
+    margin-right: 1.5em;
+    border: none;
+    color: #DA6B71;
+}
+
+#myChart {
+    display: block;
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
 }
 
 

@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="style.css" />
     <title>Day #18 - Budget App | AsmrProg</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
   <body>
@@ -48,6 +49,20 @@
               id="user-amount"
               placeholder="Enter Cost Of Product"
             />
+            <select name="catagory" id="catagory-select">
+                <option value="11">-- Please select a catagory --</option>
+                <option value=0>Rent / Mortgage</option>
+                <option value=1>Car Expenses</option>
+                <option value=2>Food</option>
+                <option value=3>Utilities</option>
+                <option value=4>Clothing</option>
+                <option value=5>Health Care</option>
+                <option value=6>Insurance</option>
+                <option value=7>House Items</option>
+                <option value=8>Debt</option>
+                <option value=9>savings</option>
+                <option value=10>Entertainment</option>
+            </select>
             <div class="submit-wrapper">
                 <button class="submit" id="check-amount">Check Amount</button>
             </div>
@@ -72,6 +87,11 @@
             </div>
           </div>
         </div>
+
+        <div class="chart-wrapper">
+            <canvas id="myChart"></canvas>
+        </div>
+
       </div>
 
       <div class="list">
