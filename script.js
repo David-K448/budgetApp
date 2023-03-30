@@ -87,7 +87,7 @@ const modifyElement = (element, edit = false) => {
 
 const listCreator = (expenseName, expenseValue) => {
   let catacolVal = "N/A";
-  // switch statement wont frickin work so heres a bunch of if statements
+  // switch statement wont f****** work so here's a bunch of if statements
   if (selectedValue == 0) {
     catacolVal = "Rent / Mortgage";
   }
