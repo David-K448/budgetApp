@@ -4,6 +4,7 @@ const checkAmountButton = document.getElementById("check-amount");
 const totalAmountButton = document.getElementById("total-amount-button");
 const productTitle = document.getElementById("product-title");
 const errorMessage = document.getElementById("budget-error");
+const isBudgetErrorMessage = document.getElementById("isBudget-error");
 const productTitleError = document.getElementById("product-title-error");
 const productCostError = document.getElementById("product-cost-error");
 const amount = document.getElementById("amount");
@@ -13,30 +14,32 @@ const balanceValue = document.getElementById("balance-amount");
 const list = document.getElementById("list");
 let catagory = document.getElementById("catagory-select");
 let tempAmount = 0;
+let isBudget = false;
 
 const colors = [
-  "#ff7f50",
-  "#6495ed",
-  "#ff69b4",
-  "#ba55d3",
-  "#cd5c5c",
-  "#ffa500",
-  "#40e0d0",
-  "#1e90ff",
-  "#ff6347",
-  "#7b68ee",
+  "#b4dece",
+  "#9bd1cb",
+  "#86c3cb",
+  "#78b4ca",
+  "#72a4c8",
+  "#7492c2",
+  "#7c7fb6",
+  "#856ba4",
+  "#8c568c",
+  "#8e426f",
   "#00fa9a",
   "#ffd700",
 ];
 
 let colorChoice = colors[11];
 
-const runningCatBudget = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100];
+const runningCatBudget = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65];
 
 var selectedValue = 11;
 
 totalAmountButton.addEventListener("click", () => {
   tempAmount = totalAmount.value;
+  
   // Bad input
   if (tempAmount === "" || tempAmount < 0) {
     errorMessage.classList.remove("hide");
@@ -51,6 +54,7 @@ totalAmountButton.addEventListener("click", () => {
     totalAmount.value = "";
     //update donut chart
     promisedDeliveryChart.update();
+    isBudget = true;
   }
 });
 
@@ -82,15 +86,59 @@ const modifyElement = (element, edit = false) => {
 // Create list function
 
 const listCreator = (expenseName, expenseValue) => {
+  let catacolVal = "N/A";
+  // switch statement wont frickin work so heres a bunch of if statements
+  if (selectedValue == 0) {
+    catacolVal = "Rent / Mortgage";
+  }
+  if (selectedValue == 1) {
+    catacolVal = "Car Expenses";
+  }
+  if (selectedValue == 2) {
+    catacolVal = "Food";
+  }
+  if (selectedValue == 3) {
+    catacolVal = "Utilities";
+  }
+  if (selectedValue == 4) {
+    catacolVal = "Clothing";
+  }
+  if (selectedValue == 5) {
+    catacolVal = "Health Care";
+  }
+  if (selectedValue == 6) {
+    catacolVal = "Insurance";
+  }
+  if (selectedValue == 7) {
+    catacolVal = "House Items";
+  }
+  if (selectedValue == 8) {
+    catacolVal = "Debt";
+  }
+  if (selectedValue == 9) {
+    catacolVal = "savings";
+  }
+  if (selectedValue == 10) {
+    catacolVal = "Entertainment";
+  }
+
   let subListContent = document.createElement("div");
   subListContent.classList.add("sublist-content", "flex-space");
   // Randomly select a color from the array
   colorChoice = colors[selectedValue];
   subListContent.style.borderColor = colorChoice;
   list.appendChild(subListContent);
-  subListContent.innerHTML = `<p class="product">${expenseName}</p><p class="amount">${
+  subListContent.innerHTML = `<p class="product">${expenseName}</p><p class="catagory-column">${catacolVal}</p><p class="amount">${
     "$" + expenseValue
   }</p>`;
+  /**
+   * adding the catagory column
+   */
+  // let catagoryCol = document.createElement("p");
+  // catagoryCol.classList.add("catagory-column");
+  // catagoryCol.style.fontSize = "1.2em";
+  // catagoryCol.innerText = "hhh";
+
   let editButton = document.createElement("button");
   editButton.classList.add("fa-solid", "fa-pen-to-square", "edit");
   editButton.style.fontSize = "1.2em";
@@ -103,15 +151,16 @@ const listCreator = (expenseName, expenseValue) => {
   deleteButton.addEventListener("click", () => {
     modifyElement(deleteButton);
   });
+
   subListContent.appendChild(editButton);
   subListContent.appendChild(deleteButton);
   document.getElementById("list").appendChild(subListContent);
 
-  let percentage = expenseValue / amount.innerText * 100;
+  let percentage = (expenseValue / amount.innerText) * 100;
   let dataUpdatePoint = data.datasets[0].data[selectedValue];
   let newPercent = dataUpdatePoint + percentage;
 
-  // subtract from default 100 val 
+  // subtract from default 100 val
   data.datasets[0].data[11] = data.datasets[0].data[11] - percentage;
 
   data.datasets[0].data[selectedValue] = newPercent;
@@ -120,26 +169,27 @@ const listCreator = (expenseName, expenseValue) => {
   // update chart with new data
   promisedDeliveryChart.update();
 
-
-////////////// TO DO /////////////
-// change the way the percentage updates, it should re-evaluate each catagories percentage each time relative to everything else
-// [0,0,0,0,100]
-// [10, 0, 0, 0, 90]
-// [10, 10, 0, 0, 80]
-// [20, 10, 0, 0, 70]
-
-
-
-
-
-
+  ////////////// TO DO /////////////
+  // change the way the percentage updates, it should re-evaluate each catagories percentage each time relative to everything else
+  // [0,0,0,0,100]
+  // [10, 0, 0, 0, 90]
+  // [10, 10, 0, 0, 80]
+  // [20, 10, 0, 0, 70]
 };
 
 checkAmountButton.addEventListener("click", () => {
+  productTitleError.classList.add("hide");
+    isBudgetErrorMessage.classList.add("hide");
   // Check empty
-  if (!userAmount.value || !productTitle.value) {
+  if (!userAmount.value || userAmount < 0 || !productTitle.value) {
     productTitleError.classList.remove("hide");
     return false;
+  } else if (isBudget == false) {
+    isBudgetErrorMessage.classList.remove("hide");
+    return false;
+  } else {
+    productTitleError.classList.add("hide");
+    isBudgetErrorMessage.classList.add("hide");
   }
   // Enable buttons
   disableButtons(false);
@@ -163,8 +213,6 @@ checkAmountButton.addEventListener("click", () => {
   //Clear inputs
   productTitle.value = "";
   userAmount.value = "";
-
-  
 });
 
 catagory.addEventListener("change", function () {

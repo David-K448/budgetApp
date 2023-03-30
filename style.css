@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #f7f9fd;
+    background-color: #F9BFBD;
 }
 
 .wrapper {
@@ -128,7 +128,8 @@ body {
     margin-bottom: 0.6em;
     padding: 0.5em 1em;
     display: grid;
-    grid-template-columns: 3fr 2fr 1fr 1fr;
+    /* grid-template-columns: 3fr 2fr 1fr 1fr; */
+    grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
 }
 
 .product {
@@ -138,7 +139,7 @@ body {
 
 .amount{
     color: #414a67;
-    margin-left: 20%;
+    margin-left: 10%;
 }
 
 .icons-container{
@@ -156,7 +157,7 @@ body {
 }
 
 .error{
-    color: #ff465a;
+    color: #C8221A;
 }
 
 .edit{
@@ -174,7 +175,7 @@ body {
 .delete {
     background: transparent;
     cursor: pointer;
-    margin-right: 1.5em;
+    margin-right: -0.5em;
     border: none;
     color: #DA6B71;
 }
